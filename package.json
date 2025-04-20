@@ -1,5 +1,5 @@
 {
-  "name": "my-turborepo",
+  "name": "deployment_fullstack",
   "private": true,
   "scripts": {
     "build": "turbo run build",
