@@ -1,13 +1,10 @@
-name: Docker file CI/CD
-
+name: Deploy the backend
 on:
   push:
-    branches: [main]
-
-jobs:
+    branches: [ main ]
+jobs: 
   build:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout the code
         uses: actions/checkout@v2
@@ -17,8 +14,8 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-
-      - name: Build and push Docker image
+      
+      - name: Build and push 
         uses: docker/build-push-action@v4
         with:
           context: .
