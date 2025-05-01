@@ -1,0 +1,21 @@
+FROM oven/bun:1
+
+WORKDIR /usr/src/app
+ARG DATABASE_URL
+
+COPY ./Packages ./Packages
+COPY  ./bun.lock ./bun.lock
+
+COPY ./Packages.json ./Packages.json
+COPY ./turbo.json ./turbo.json
+COPY ./apps/frontend .apps/backend
+
+RUN bun install
+# RUN cd packages/db && npx prisma generate && cd ../.. we can add this as a script in root as a db:migrate package.json
+RUN bun run db:generate
+
+RUN DATABASE_URL=${DATABASE_URL} bun run build
+
+EXPOSE 3000
+
+CMD [ "bun","run","start:web" ]
